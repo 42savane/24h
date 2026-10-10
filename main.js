@@ -20,7 +20,8 @@
     { name: 'Guillaume', totem: 'Hibou',      avatar: 'av-hibou.svg',      photo: '' },
     { name: 'Yacine',    totem: 'Éléphant',   avatar: 'av-elephant.svg',   photo: '' },
     { name: 'Enzo',      totem: 'Grenouille', avatar: 'av-grenouille.svg', photo: '' },
-    { name: 'Léo',       totem: 'Python',     avatar: 'av-python.svg',     photo: '' }
+    { name: 'Léo',       totem: 'Python',     avatar: 'av-python.svg',     photo: '' },
+    { name: 'Amandine',  totem: 'Papillon',   avatar: 'av-papillon.svg',   photo: '' }
   ];
 
   /* ---------- titres / stats / descriptions, tirés au sort ---------- */
