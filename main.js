@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  /* ---------- siteConfig : repère du compte à rebours (fuseau Europe/Paris) ---------- */
+  /* ---------- siteConfig : départ des 24 heures (fuseau Europe/Paris) ---------- */
   var SITE = { tz: 'Europe/Paris', year: 2026, month: 10, day: 21, hour: 0, minute: 0 };
 
   /* ---------- crew : photo = chemin d'une image (optionnel, sinon avatar illustré) ---------- */
@@ -56,7 +56,7 @@
 
   /* ---------- terminal ---------- */
   var TERM_CMDS = ['help', 'crew', 'countdown', 'missions', 'whoami', 'piscine', 'norminette', 'segfault', 'tiger', 'clear', 'exit'];
-  var HELP = 'Commandes disponibles :\n  help        cette aide\n  crew        l’équipage de la savane\n  countdown   temps avant la rentrée\n  missions    les missions prévues\n  whoami      qui es-tu, vraiment ?\n  piscine     hommage à la Piscine d’août 2026\n  norminette  passer le site à la Norminette\n  segfault    à tes risques et périls\n  tiger       réveiller le tigre\n  clear       nettoyer le terminal\n  exit        fermer le terminal';
+  var HELP = 'Commandes disponibles :\n  help        cette aide\n  crew        l’équipage de la savane\n  countdown   temps avant les 24 heures\n  missions    les missions prévues\n  whoami      qui es-tu, vraiment ?\n  piscine     hommage à la Piscine d’août 2026\n  norminette  passer le site à la Norminette\n  segfault    à tes risques et périls\n  tiger       réveiller le tigre\n  clear       nettoyer le terminal\n  exit        fermer le terminal';
   var WHOAMI = ['visiteur@savane — rang : survivant en devenir. Café : critique. Sommeil : NULL.', 'Un processus orphelin adopté par la meute. Bienvenue dans la jungle.', 'uid=42(stud) gid=42(savane) groupes=42(tronc-commun)'];
   var PISCINE_ART = '+--------------------------------------+\n|  PISCINE 42 ANGOULÊME — AOÛT 2026    |\n|  statut ........... VALIDÉE ✓        |\n|  debug ............ beaucoup         |\n|  abandon .......... jamais           |\n+--------------------------------------+\nRespect à toutes celles et ceux qui ont plongé.\nBadge caché débloqué : PISCINE COMPLETED.';
 
@@ -77,7 +77,7 @@
     if (guess - off2 !== t) t = guess - off2;
     return t;
   }
-  var TARGET = zoned(SITE); /* 21/10/2026 00:00 à Paris = 20/10/2026 22:00 UTC */
+  var TARGET = zoned(SITE); /* mercredi 21/10/2026 00:00 à Paris = 20/10/2026 22:00 UTC */
   var DAY = 86400000;
   function shuffle(a) { var r = a.slice(); for (var i = r.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = r[i]; r[i] = r[j]; r[j] = t; } return r; }
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -158,10 +158,10 @@
     var now = nowEff(), diff = TARGET - now, after = diff <= 0, t = split(diff);
     setDigits(cdEls.d, t.d); setDigits(cdEls.h, t.h); setDigits(cdEls.m, t.m); setDigits(cdEls.s, t.s);
     $('#hud').textContent = after ? 'J+' + t.d + ' · TRONC COMMUN' : 'T-' + p2(t.d) + 'J ' + p2(t.h) + ':' + p2(t.m) + ':' + p2(t.s);
-    $('#cd-h').textContent = after ? 'La rentrée a commencé il y a…' : 'Le compte à rebours avant le grand saut';
+    $('#cd-h').textContent = after ? 'Les 24 heures ont commencé il y a…' : 'Le compte à rebours avant le grand saut';
     $('#cd-quote').textContent = after ? '« La savane est ouverte. Bienvenue au tronc commun ! »' : '« Chaque seconde nous rapproche du tronc commun. »';
     $('#cd-foot').textContent = after ? 'Statut : savane ouverte' : 'Statut : en approche';
-    var aria = after ? 'La rentrée a commencé il y a ' + t.d + ' jours et ' + t.h + ' heures.' : 'Il reste ' + t.d + ' jours, ' + t.h + ' heures et ' + t.m + ' minutes avant la rentrée.';
+    var aria = after ? 'Les 24 heures ont commencé il y a ' + t.d + ' jours et ' + t.h + ' heures.' : 'Il reste ' + t.d + ' jours, ' + t.h + ' heures et ' + t.m + ' minutes avant les 24 heures.';
     if (aria !== lastAria) { lastAria = aria; $('#cd-slab').setAttribute('aria-label', aria); }
   }
   function celebrate(force) {
@@ -171,8 +171,8 @@
   }
   function cdText() {
     var diff = TARGET - nowEff(), t = split(diff);
-    if (diff > 0) return 'Rentrée dans ' + t.d + ' j ' + p2(t.h) + ' h ' + p2(t.m) + ' min ' + p2(t.s) + ' s\n(repère : 21/10/2026 00:00, heure de Paris)';
-    return 'La rentrée a commencé il y a ' + t.d + ' j ' + p2(t.h) + ' h ' + p2(t.m) + ' min. Bienvenue au tronc commun !';
+    if (diff > 0) return '24H EN SAVANE dans ' + t.d + ' j ' + p2(t.h) + ' h ' + p2(t.m) + ' min ' + p2(t.s) + ' s\n(repère : mercredi 21/10/2026 00:00, heure de Paris)';
+    return 'Les 24 heures ont commencé il y a ' + t.d + ' j ' + p2(t.h) + ' h ' + p2(t.m) + ' min. Bienvenue dans la savane !';
   }
   renderCountdown();
   if (!preview && lastEff >= TARGET && lastEff - TARGET < DAY) celebrate(false);
