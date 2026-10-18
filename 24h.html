@@ -107,10 +107,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)}
 .timer{font-family:var(--fm);font-weight:800;font-size:calc(var(--u)*6.3);line-height:1;letter-spacing:-.02em;color:#FFD166;text-shadow:0 0 calc(var(--u)*1.2) rgba(255,209,102,.7),0 0 calc(var(--u)*3) rgba(255,134,23,.5);font-variant-numeric:tabular-nums;white-space:nowrap}
 .timer .sep{display:inline-block;animation:colon 1s steps(1) infinite}
-.app.idle .timer .sep,.app.paused .timer .sep{animation:none}
+.app.idle .timer .sep{animation:none}
 .app.urgent .timer{color:#FF9A6A;text-shadow:0 0 calc(var(--u)*1.2) rgba(255,107,90,.8),0 0 calc(var(--u)*3) rgba(255,60,30,.5);animation:urg 1s ease-in-out infinite}
-.app.paused .timer{opacity:.45}
-.ptag{position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%) rotate(-6deg);padding:.6vh calc(var(--u)*1.4);border:3px solid #111713;border-radius:calc(var(--u)*.6);background:var(--gold);color:#111713;font-family:var(--fd);font-size:calc(var(--u)*2.6);box-shadow:0 calc(var(--u)*.4) 0 #111713;animation:blink 1.2s steps(1) infinite}
 .bar{position:relative;z-index:1;margin:2.2vh calc(var(--u)*.6) 0;height:1.6vh;border-radius:1vh;background:rgba(17,23,19,.6);border:2px solid #111713}
 .bar-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:1vh;background:repeating-linear-gradient(110deg,#F68B1E 0 calc(var(--u)*1.2),#111713 calc(var(--u)*1.2) calc(var(--u)*1.6));box-shadow:0 0 calc(var(--u)*1) rgba(246,139,30,.6);transition:width .4s linear}
 .bar-tg{position:absolute;top:50%;left:0;width:calc(var(--u)*3.4);height:calc(var(--u)*3.4);margin:calc(var(--u)*-1.7) 0 0 calc(var(--u)*-1.7);transition:left .4s linear;filter:drop-shadow(0 calc(var(--u)*.3) calc(var(--u)*.3) rgba(0,0,0,.5))}
@@ -200,7 +198,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes ffBlink{0%,100%{opacity:.12}50%{opacity:1}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 @keyframes colon{50%{opacity:.25}}
-@keyframes blink{50%{opacity:.35}}
 @keyframes urg{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
 @keyframes goPulse{0%,100%{box-shadow:inset 0 2px 0 rgba(255,255,255,.5),inset 0 -4px 0 rgba(0,0,0,.25),0 calc(var(--u)*.5) 0 #4A230B,0 0 calc(var(--u)*2) rgba(255,134,23,.45)}50%{box-shadow:inset 0 2px 0 rgba(255,255,255,.5),inset 0 -4px 0 rgba(0,0,0,.25),0 calc(var(--u)*.5) 0 #4A230B,0 0 calc(var(--u)*5) rgba(255,134,23,.85)}}
 @keyframes tick{to{transform:translateX(-50%)}}
@@ -318,11 +315,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div class="slab-w">
 <div class="slab" role="timer" aria-live="off" id="slab">
 <div class="t-lab" id="t-lab">Temps restant</div>
-<div class="screen"><div class="timer" id="timer">24<span class="sep">:</span>00<span class="sep">:</span>00</div><span class="ptag run-only" id="ptag" hidden>En pause</span></div>
+<div class="screen"><div class="timer" id="timer">24<span class="sep">:</span>00<span class="sep">:</span>00</div></div>
 <div class="bar" aria-hidden="true"><div class="bar-fill" id="bar"></div>
 <svg class="bar-tg" id="bar-tg" viewBox="0 0 64 64"><path class="k3" fill="#F68B1E" d="M12 22L9 6L25 13Z M52 22L55 6L39 13Z"></path><path class="k3" fill="#F68B1E" d="M32 9C48 9 58 19 58 33C58 45 54 51 46 56C40 59 36 61 32 61C28 61 24 59 18 56C10 51 6 45 6 33C6 19 16 9 32 9Z"></path><path fill="#FFF1D2" d="M32 35C40 35 47 39 48 47C48 54 40 58 32 58C24 58 16 54 16 47C17 39 24 35 32 35Z"></path><path fill="#111713" d="M32 10L29 17L32 15L35 17Z M14 23L22 26L14 28Z M50 23L42 26L50 28Z"></path><path class="k15" fill="#FFD166" d="M17 29C20 25 25 25 28 29C25 32 20 32 17 29Z M47 29C44 25 39 25 36 29C39 32 44 32 47 29Z"></path><circle fill="#111713" cx="23" cy="29" r="1.9"></circle><circle fill="#111713" cx="41" cy="29" r="1.9"></circle><path fill="#3B1F1A" d="M28 40L36 40L32 44Z"></path></svg>
 </div>
-<div class="t-foot"><span id="f-start">Départ : au signal</span><span id="f-pct">0 %</span><span id="f-end">Fin : dans 24 h</span></div>
+<div class="t-foot"><span id="f-start">Départ : mer. 00:00</span><span id="f-pct">0 %</span><span id="f-end">Fin : jeu. 00:00</span></div>
 </div>
 </div>
 </div>
@@ -331,8 +328,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div class="stat"><b id="s-dead">0</b><span>Éliminés</span></div>
 <div class="stat"><b id="s-el">00:00:00</b><span>Écoulé</span></div>
 </div>
-<button class="go idle-only" type="button" id="go">Lancer les 24 h</button>
-<p class="go-hint idle-only">Barre espace pour lancer · F pour le plein écran</p>
+<button class="go idle-only" type="button" id="go">Activer le son</button>
+<p class="go-hint idle-only">Départ automatique mercredi 21/10 à 00:00 · F pour le plein écran</p>
 </section>
 
 <section class="col" aria-labelledby="dead-h">
@@ -352,7 +349,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 <!-- contrôles -->
 <div class="ctrl" id="ctrl" role="toolbar" aria-label="Contrôles de l’organisateur">
 <button class="cb" type="button" id="b-full">Plein écran</button>
-<button class="cb run-only" type="button" id="b-pause">Pause</button>
 <button class="cb" type="button" id="b-sound" aria-pressed="true">Son</button>
 <button class="cb run-only" type="button" id="b-end">Terminer</button>
 <button class="cb danger" type="button" id="b-reset">Réinitialiser</button>
@@ -419,9 +415,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 <script>
 /* =====================================================================
    24H EN SAVANE — chrono grand écran (vanilla JS)
+   Départ AUTOMATIQUE : mercredi 21/10/2026 à 00:00 (heure de Paris)
+   Fin automatique    : jeudi 22/10/2026 à 00:00 (heure de Paris)
+   Le chrono suit l'horloge : page ouverte à 03:00 → il affiche 21:00:00.
    Les participants et les raisons d'élimination sont modifiables ici.
-   L'état est sauvegardé dans le navigateur : un rechargement ne perd rien.
-   Test rapide : 24h.html?test=20 (chrono de 20 s, sauvegarde séparée).
+   Les éliminations sont sauvegardées dans le navigateur : un rechargement ne perd rien.
+   Test rapide : 24h.html?test=20 (départ dans 8 s, chrono de 20 s, sauvegarde séparée).
    ===================================================================== */
 (function () {
   'use strict';
@@ -434,18 +433,22 @@ button{font:inherit;color:inherit;cursor:pointer}
   var REASONS = ['Log time fini', 'Sieste fatale', 'Abandon', 'Retour à la maison', 'Segfault fatal', 'Dévoré par le tigre'];
   var TICKER = ['WARNING: SLEEP NOT FOUND', 'Hydratez-vous, survivants', 'La Norminette vous regarde', 'Un segfault ne tue que les faibles', 'Red Bull non-stop', 'Personne ne reste seul dans la jungle', 'git commit -m "encore debout"', 'malloc(courage) != NULL', 'Le tigre ne dort jamais', 'PAW RRR !'];
 
-  /* ---------- état ---------- */
+  /* ---------- horaires (Europe/Paris, encore à l'heure d'été jusqu'au 25/10) ---------- */
   var params = new URLSearchParams(location.search);
   var TEST = parseInt(params.get('test') || '0', 10);
   var DURATION = TEST > 0 ? TEST * 1000 : 24 * 3600 * 1000;
-  var KEY = TEST > 0 ? 'savane24h-test' : 'savane24h-v1';
+  var START_AT = TEST > 0 ? Date.now() + 8000 : Date.parse('2026-10-21T00:00:00+02:00'); /* mercredi 21/10 00:00 */
+  var END_AT = START_AT + DURATION;                                                         /* jeudi 22/10 00:00 */
+  var KEY = TEST > 0 ? 'savane24h-test' : 'savane24h-v2';
+
+  /* ---------- état ---------- */
   function fresh() {
-    return { v: 1, duration: DURATION, startedAt: null, pausedAt: null, pausedMs: 0, ended: false, sound: true,
+    return { v: 2, ended: false, endedAt: null, sound: true,
       people: PEOPLE.map(function (p, i) { return { id: 'p' + i, name: p[0], av: p[1], elim: null }; }) };
   }
   function load() {
     if (TEST > 0) return null;
-    try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1 && Array.isArray(s.people)) return s; } catch (e) {}
+    try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 2 && Array.isArray(s.people)) return s; } catch (e) {}
     return null;
   }
   var S = load() || fresh();
@@ -458,12 +461,17 @@ button{font:inherit;color:inherit;cursor:pointer}
   function hms(ms) { var s = Math.max(0, Math.round(ms / 1000)); return p2(Math.floor(s / 3600)) + ':' + p2(Math.floor((s % 3600) / 60)) + ':' + p2(s % 60); }
   function hmsCeil(ms) { var s = Math.max(0, Math.ceil(ms / 1000)); return [Math.floor(s / 3600), Math.floor((s % 3600) / 60), s % 60]; }
   function clockOf(ts) { try { return new Date(ts).toLocaleTimeString('fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' }); } catch (e) { var d = new Date(ts); return p2(d.getHours()) + ':' + p2(d.getMinutes()); } }
+  function dayClock(ts) { try { return new Date(ts).toLocaleString('fr-FR', { timeZone: 'Europe/Paris', weekday: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return clockOf(ts); } }
+  function untilText(ms) { var s = Math.max(0, Math.ceil(ms / 1000)), d = Math.floor(s / 86400); return (d ? d + ' j ' : '') + p2(Math.floor((s % 86400) / 3600)) + ':' + p2(Math.floor((s % 3600) / 60)) + ':' + p2(s % 60); }
   function elapsed() {
-    if (!S.startedAt) return 0;
-    var now = S.pausedAt || Date.now();
-    return Math.max(0, Math.min(S.duration, now - S.startedAt - S.pausedMs));
+    var t = S.ended && S.endedAt ? S.endedAt : Date.now();
+    return Math.max(0, Math.min(DURATION, t - START_AT));
   }
-  function phase() { return S.ended ? 'ended' : (S.startedAt ? 'running' : 'idle'); }
+  function phase() {
+    var n = Date.now();
+    if (S.ended || n >= END_AT) return 'ended';
+    return n >= START_AT ? 'running' : 'idle';
+  }
 
   /* =====================================================================
      son (généré, aucun fichier)
@@ -569,7 +577,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     }).join('') + '<li class="pli"><button class="p p-add" type="button" id="add-btn">+ Ajouter un survivant</button></li>';
     deadEl.innerHTML = dead.length ? dead.map(function (p) {
       return '<li class="d' + (fresher[p.id] === 'dead' ? ' dnew' : '') + '"><img src="' + esc(p.av) + '" alt=""><span><span class="nm">' + esc(p.name) + '</span><span class="why">' + esc(p.elim.why) + '</span></span>' +
-        '<span class="at">' + hms(p.elim.at) + '<small>tenu</small><button class="undo" type="button" data-undo="' + p.id + '" aria-label="Réintégrer ' + esc(p.name) + '" title="Réintégrer">↺</button></span></li>';
+        '<span class="at">' + hms(p.elim.at) + '<small>tenu · ' + esc(dayClock(p.elim.wall)) + '</small><button class="undo" type="button" data-undo="' + p.id + '" aria-label="Réintégrer ' + esc(p.name) + '" title="Réintégrer">↺</button></span></li>';
     }).join('') : '<li class="empty">Personne pour l’instant. La jungle attend…</li>';
     fresher = {};
     $('#n-alive').textContent = alive.length; $('#n-dead').textContent = dead.length;
@@ -580,7 +588,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     if (rm) { if (phase() !== 'idle') return; S.people = S.people.filter(function (p) { return p.id !== rm.getAttribute('data-rm'); }); save(); renderPeople(); return; }
     if (e.target.closest('#add-btn')) { openPicker('add'); return; }
     var b = e.target.closest('.p[data-id]');
-    if (b) { if (phase() === 'running') openPicker('elim', b.getAttribute('data-id')); else if (phase() === 'idle') flash('Lance le chrono pour pouvoir éliminer', 'Barre espace ou bouton « Lancer »', 'gold'); }
+    if (b) { if (phase() === 'running') openPicker('elim', b.getAttribute('data-id')); else if (phase() === 'idle') flash('LES 24 H N’ONT PAS COMMENCÉ', 'Départ automatique ' + dayClock(START_AT), 'gold'); }
   });
   deadEl.addEventListener('click', function (e) {
     var u = e.target.closest('[data-undo]'); if (!u || phase() === 'ended') return;
@@ -644,71 +652,66 @@ button{font:inherit;color:inherit;cursor:pointer}
   }
 
   /* =====================================================================
-     chrono
+     chrono (calé sur l'horloge, départ et fin automatiques)
      ===================================================================== */
-  var lastRem = null, lastFinal = null, seq = false;
+  var lastRem = null, lastFinal = null, lastPh = null, seq = false, endShown = false;
   var MILESTONES = [];
   for (var h = 23; h >= 1; h--) MILESTONES.push([h * 3600000, 'PLUS QUE ' + h + ' H']);
   MILESTONES.push([30 * 60000, 'PLUS QUE 30 MIN'], [10 * 60000, 'PLUS QUE 10 MIN'], [5 * 60000, 'PLUS QUE 5 MIN'], [60000, 'DERNIÈRE MINUTE']);
   function renderTimer() {
-    var ph = phase(), el = elapsed(), rem = S.duration - el;
+    var nowT = Date.now(), ph = phase(), el = elapsed(), rem = DURATION - el;
     app.classList.toggle('idle', ph === 'idle'); app.classList.toggle('running', ph === 'running'); app.classList.toggle('ended', ph === 'ended');
-    app.classList.toggle('paused', ph === 'running' && !!S.pausedAt);
     app.classList.toggle('urgent', ph === 'running' && rem <= 3600000);
-    var t = hmsCeil(ph === 'idle' ? S.duration : rem);
+    var t = hmsCeil(ph === 'idle' ? DURATION : rem);
     $('#timer').innerHTML = p2(t[0]) + '<span class="sep">:</span>' + p2(t[1]) + '<span class="sep">:</span>' + p2(t[2]);
-    var pct = Math.min(100, (el / S.duration) * 100);
+    var pct = Math.min(100, (el / DURATION) * 100);
     $('#bar').style.width = pct + '%'; $('#bar-tg').style.left = pct + '%';
     $('#f-pct').textContent = Math.floor(pct) + ' %';
     $('#s-el').textContent = hms(el);
-    $('#ptag').hidden = !(ph === 'running' && S.pausedAt);
-    $('#b-pause').textContent = S.pausedAt ? 'Reprendre' : 'Pause';
-    if (S.startedAt) {
-      $('#f-start').textContent = 'Départ : ' + clockOf(S.startedAt);
-      $('#f-end').textContent = S.pausedAt ? 'Fin : en pause' : 'Fin : ' + clockOf(S.startedAt + S.duration + S.pausedMs);
-    } else { $('#f-start').textContent = 'Départ : au signal'; $('#f-end').textContent = 'Durée : ' + (TEST > 0 ? TEST + ' s (test)' : '24 h'); }
-    $('#t-lab').textContent = ph === 'idle' ? 'Prêts ? Le chrono attend le signal' : 'Temps restant';
-    $('#slab').setAttribute('aria-label', 'Temps restant : ' + hms(rem));
-    $('#clock').textContent = clockOf(Date.now());
-    if (ph === 'running' && !S.pausedAt) {
-      if (lastRem !== null) MILESTONES.forEach(function (m) { if (lastRem > m[0] && rem <= m[0] && m[0] < S.duration) { flash(m[1], 'Tenez bon, survivants', 'gold'); ding(); } });
+    $('#f-start').textContent = 'Départ : ' + dayClock(START_AT);
+    $('#f-end').textContent = 'Fin : ' + dayClock(END_AT);
+    $('#t-lab').textContent = ph === 'idle' ? 'Départ dans ' + untilText(START_AT - nowT) : (ph === 'ended' ? 'Temps écoulé' : 'Temps restant');
+    $('#slab').setAttribute('aria-label', ph === 'idle' ? 'Départ automatique dans ' + untilText(START_AT - nowT) : 'Temps restant : ' + hms(rem));
+    $('#clock').textContent = clockOf(nowT);
+    if (ph === 'idle' && !seq && START_AT - nowT <= 3500) startSequence();
+    if (ph === 'running') {
+      if (lastPh === 'idle' && !seq) goFx();
+      if (lastPh !== 'running') lastRem = rem;
+      MILESTONES.forEach(function (m) { if (lastRem > m[0] && rem <= m[0] && m[0] < DURATION) { flash(m[1], 'Tenez bon, survivants', 'gold'); ding(); } });
       lastRem = rem;
       var f = $('#ov-final');
       if (rem <= 10000 && rem > 0) {
         var n = Math.ceil(rem / 1000);
         if (n !== lastFinal) { lastFinal = n; f.hidden = false; f.innerHTML = '<div class="fnum">' + n + '</div>'; beep(n <= 3); }
       } else f.hidden = true;
-      if (rem <= 0) finish(true);
-    } else if (ph !== 'running') $('#ov-final').hidden = true;
+    } else $('#ov-final').hidden = true;
+    if (ph === 'ended' && !endShown) finish(lastPh === 'running');
+    lastPh = ph;
   }
+  /* 3, 2, 1, GO calés pour que le GO tombe pile à l'heure de départ */
   function startSequence() {
-    if (phase() !== 'idle' || seq) return;
+    if (seq) return;
     seq = true; unlock();
-    var ov = $('#ov-count'); ov.hidden = false;
-    var steps = ['3', '2', '1', 'GO'], i = 0;
-    (function step() {
-      var s = steps[i], d = document.createElement('div');
-      d.className = 'cnum ' + (s === 'GO' ? 'cgo' : 'c' + s); d.textContent = s === 'GO' ? 'GOOOOO !' : s;
-      ov.replaceChildren(d);
-      if (s === 'GO') {
-        S.startedAt = Date.now(); S.pausedAt = null; S.pausedMs = 0; S.ended = false; save();
-        lastRem = S.duration; horn(); roar(1.6); roarFx(); pop(); renderTimer(); renderPeople(); wake();
-        setTimeout(function () { ov.hidden = true; seq = false; }, 1400);
-      } else { beep(false); i++; setTimeout(step, 1000); }
-    })();
+    [['3', 3000], ['2', 2000], ['1', 1000], ['GO', 0]].forEach(function (st) {
+      var wait = START_AT - st[1] - Date.now();
+      if (st[0] !== 'GO' && wait < -900) return;
+      setTimeout(function () { showStep(st[0]); }, Math.max(0, wait));
+    });
   }
+  function showStep(s) {
+    var ov = $('#ov-count'), d = document.createElement('div');
+    d.className = 'cnum ' + (s === 'GO' ? 'cgo' : 'c' + s); d.textContent = s === 'GO' ? 'GOOOOO !' : s;
+    ov.replaceChildren(d); ov.hidden = false;
+    if (s === 'GO') { goFx(); setTimeout(function () { ov.hidden = true; seq = false; }, 1400); }
+    else beep(false);
+  }
+  function goFx() { lastFinal = null; horn(); roar(1.6); roarFx(); pop(); wake(); renderPeople(); }
   function roarFx() {
     app.classList.remove('roar', 'shake'); void app.offsetWidth; app.classList.add('roar', 'shake');
     setTimeout(function () { app.classList.remove('roar', 'shake'); }, 1500);
   }
-  function togglePause() {
-    if (phase() !== 'running') return;
-    if (S.pausedAt) { S.pausedMs += Date.now() - S.pausedAt; S.pausedAt = null; lastRem = S.duration - elapsed(); flash('ON REPREND', 'Le chrono repart', 'gold'); ding(); }
-    else { S.pausedAt = Date.now(); flash('PAUSE', 'Le chrono est arrêté', 'gold'); }
-    save(); renderTimer();
-  }
   function finish(fx) {
-    if (!S.ended) { S.ended = true; S.endedAt = Date.now(); if (!S.pausedAt) S.pausedAt = null; save(); }
+    endShown = true;
     $('#ov-final').hidden = true;
     var alive = S.people.filter(function (p) { return !p.elim; });
     var dead = S.people.filter(function (p) { return p.elim; }).sort(function (a, b) { return a.elim.at - b.elim.at; });
@@ -717,7 +720,6 @@ button{font:inherit;color:inherit;cursor:pointer}
       : '<li class="end-none">La savane a gagné cette fois…</li>';
     $('#end-fallen').innerHTML = dead.length ? '<b>Tombés au combat :</b> ' + dead.map(function (p) { return esc(p.name) + ' (' + esc(p.elim.why.toLowerCase()) + ', ' + hms(p.elim.at) + ')'; }).join(' · ') : '<b>Personne n’est tombé.</b> Équipage légendaire.';
     $('#ov-end').hidden = false;
-    renderTimer();
     if (fx) {
       roar(3.2); setTimeout(function () { roar(2.4); }, 2600);
       roarFx(); party(16000);
@@ -726,12 +728,18 @@ button{font:inherit;color:inherit;cursor:pointer}
   }
 
   /* ---------- contrôles ---------- */
-  $('#go').addEventListener('click', startSequence);
-  $('#b-pause').addEventListener('click', togglePause);
-  $('#b-end').addEventListener('click', function () { if (phase() === 'running' && window.confirm('Terminer l’épreuve maintenant ?')) finish(true); });
+  $('#go').addEventListener('click', function () {
+    S.sound = true; save(); syncSound(); wake();
+    var a = audio();
+    if (a && a.state !== 'running' && a.resume) a.resume().then(ding, function () {}); else ding();
+    $('#go').textContent = 'Son activé ✓';
+  });
+  $('#b-end').addEventListener('click', function () {
+    if (phase() === 'running' && window.confirm('Terminer l’épreuve maintenant ?')) { S.ended = true; S.endedAt = Date.now(); save(); renderTimer(); }
+  });
   $('#b-reset').addEventListener('click', function () {
-    if (!window.confirm('Tout réinitialiser ? Le chrono et les éliminations seront effacés.')) return;
-    S = fresh(); save(); lastRem = null; lastFinal = null; $('#ov-end').hidden = true; rainUntil = 0; parts = []; renderPeople(); renderTimer();
+    if (!window.confirm('Tout réinitialiser ? La liste et les éliminations seront remises à zéro (le chrono reste calé sur l’horloge).')) return;
+    S = fresh(); save(); lastFinal = null; endShown = false; $('#ov-end').hidden = true; rainUntil = 0; parts = []; renderPeople(); renderTimer();
   });
   function syncSound() { $('#b-sound').setAttribute('aria-pressed', S.sound ? 'true' : 'false'); $('#b-sound').textContent = S.sound ? 'Son : on' : 'Son : off'; }
   $('#b-sound').addEventListener('click', function () { S.sound = !S.sound; save(); syncSound(); if (S.sound) { unlock(); ding(); } });
@@ -743,8 +751,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     if (!$('#pk-wrap').hidden) return;
     var tag = (e.target && e.target.tagName) || '';
     if (tag === 'INPUT') return;
-    if (e.code === 'Space') { e.preventDefault(); if (phase() === 'idle') startSequence(); else togglePause(); }
-    else if (e.key === 'f' || e.key === 'F') fullscreen();
+    if (e.key === 'f' || e.key === 'F') fullscreen();
   });
 
   /* masque curseur + contrôles quand on ne touche plus à la souris */
@@ -756,19 +763,17 @@ button{font:inherit;color:inherit;cursor:pointer}
   document.addEventListener('mousemove', showUi); document.addEventListener('pointerdown', showUi);
   showUi();
 
-  /* garde l'écran allumé pendant 24 h */
+  /* garde l'écran allumé (avant et pendant les 24 h) */
   var lock = null;
   function wake() { try { if ('wakeLock' in navigator && !lock) navigator.wakeLock.request('screen').then(function (l) { lock = l; l.addEventListener('release', function () { lock = null; }); }).catch(function () {}); } catch (e) {} }
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && phase() === 'running') wake(); });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && phase() !== 'ended') wake(); });
 
   /* bandeau */
   var tk = TICKER.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
   $('#tk').innerHTML = tk + tk;
 
   /* démarrage */
-  syncSound(); renderPeople(); renderTimer();
-  if (phase() === 'running') { lastRem = S.duration - elapsed(); wake(); }
-  if (phase() === 'ended') finish(false);
+  syncSound(); renderPeople(); renderTimer(); wake();
   setInterval(renderTimer, 250);
 })();
 </script>
